@@ -4,5 +4,7 @@
     <string name="app_name">بلدية سلفيت</string>
     <string name="hello_world">مرحبا</string>
     <string name="action_settings">خيارات</string>
+    <string name="sign_in">تسجيل الدخول</string>
+    <string name="sign_up">تسجيل حساب</string>
 
 </resources>
