@@ -3,8 +3,16 @@
 
     <string name="app_name">بلدية سلفيت</string>
     <string name="hello_world">مرحبا</string>
-    <string name="action_settings">خيارات</string>
+    <string name="action_settings">تسجيل الخروج</string>
     <string name="sign_in">تسجيل الدخول</string>
     <string name="sign_up">تسجيل حساب</string>
+    <string name="tostSignupFirst">لم تقم بتسجيل الحساب مسبقاً, قم بتسجيل الحساب ثم حاول لاحقاً</string>
+    <string name="title_activity_landing">بلدية سلفيت</string>
+    <string name="complaints_title">شكاوى و اقتراحات</string>
+    <string name="activities_title">نشاطات البلدية</string>
+    <string name="old_places_title">مواقع أثرية</string>
+    <string name="contact_title">تواصل معنا</string>
+    <string name="about_title">عن البلدية</string>
+    <string name="invoices_title">فواتير</string>
 
 </resources>
