@@ -14,10 +14,15 @@ public class SplashActivity extends ActionBarActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		if (getIntent().getBooleanExtra("EXIT", false)) {
+		    finish();  
+		}
 		super.onCreate(savedInstanceState);
 		final SharedPreferences sharedPreferences = getSharedPreferences("baladeye", MODE_PRIVATE);
 		if(sharedPreferences.contains("loggedIn") && sharedPreferences.getBoolean("loggedIn", false) != false){
 			Intent intent = new Intent(this, LandingActivity.class);
+			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			intent.putExtra("EXIT", true);
 			startActivity(intent);
 			finish();
 		}

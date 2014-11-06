@@ -5,7 +5,7 @@
     <!-- Strings related to login -->
     <string name="prompt_email">البريد الإلكتروني</string>
     <string name="prompt_password">كلمة السر</string>
-    <string name="action_sign_in">تسجيل الحساب</string>
+    <string name="action_sign_up">تسجيل الحساب</string>
     <string name="action_sign_in_short">تسجيل الحساب</string>
     <string name="error_invalid_email">البريد الإلكتروني غير صالح</string>
     <string name="error_invalid_password">كلمة السر قصيرة</string>

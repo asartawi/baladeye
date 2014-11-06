@@ -78,7 +78,7 @@ public class LoginActivity extends Activity implements
 					}
 				});
 
-		Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+		Button mEmailSignInButton = (Button) findViewById(R.id.email_register_button);
 		mEmailSignInButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -121,13 +121,6 @@ public class LoginActivity extends Activity implements
 		boolean cancel = false;
 		View focusView = null;
 
-		// Check for a valid password, if the user entered one.
-		if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
-			mPasswordView.setError(getString(R.string.error_invalid_password));
-			focusView = mPasswordView;
-			cancel = true;
-		}
-
 		// Check for a valid email address.
 		if (TextUtils.isEmpty(email)) {
 			mEmailView.setError(getString(R.string.error_field_required));
@@ -138,7 +131,12 @@ public class LoginActivity extends Activity implements
 			focusView = mEmailView;
 			cancel = true;
 		}
-
+		// Check for a valid password, if the user entered one.
+		if (TextUtils.isEmpty(password) || !isPasswordValid(password)) {
+			mPasswordView.setError(getString(R.string.error_invalid_password));
+			focusView = mPasswordView;
+			cancel = true;
+		}
 		if (cancel) {
 			// There was an error; don't attempt login and focus the first
 			// form field with an error.
@@ -158,8 +156,7 @@ public class LoginActivity extends Activity implements
 	}
 
 	private boolean isPasswordValid(String password) {
-		// TODO: Replace this with your own logic
-		return password.length() > 4;
+		return password != null && !password.equals("") &&  password.length() > 4;
 	}
 
 	/**
@@ -341,6 +338,8 @@ public class LoginActivity extends Activity implements
 
 			if (success) {
 				Intent intent = new Intent(LoginActivity.this, LandingActivity.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				intent.putExtra("EXIT", true);
 				startActivity(intent);
 				finish();
 

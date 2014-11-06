@@ -1,9 +1,11 @@
 package com.AOU.baladeye;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-
 import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.ContentResolver;
@@ -14,8 +16,8 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build.VERSION;
 import android.os.Build;
+import android.os.Build.VERSION;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
@@ -28,11 +30,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.google.android.gms.common.SignInButton;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A login screen that offers login via email/password and via Google+ sign in.
@@ -87,7 +84,7 @@ public class RegistrationActivity extends Activity implements
 					}
 				});
 
-		Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+		Button mEmailSignInButton = (Button) findViewById(R.id.email_register_button);
 		mEmailSignInButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -131,13 +128,6 @@ public class RegistrationActivity extends Activity implements
 		boolean cancel = false;
 		View focusView = null;
 
-		// Check for a valid password, if the user entered one.
-		if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
-			mPasswordView.setError(getString(R.string.error_invalid_password));
-			focusView = mPasswordView;
-			cancel = true;
-		}
-
 		// Check for a valid email address.
 		if (TextUtils.isEmpty(email)) {
 			mEmailView.setError(getString(R.string.error_field_required));
@@ -148,7 +138,12 @@ public class RegistrationActivity extends Activity implements
 			focusView = mEmailView;
 			cancel = true;
 		}
-
+		// Check for a valid password, if the user entered one.
+		if (TextUtils.isEmpty(password) || !isPasswordValid(password)) {
+			mPasswordView.setError(getString(R.string.error_invalid_password))  ;
+			focusView = mPasswordView;
+			cancel = true;
+		}
 		if (cancel) {
 			// There was an error; don't attempt login and focus the first
 			// form field with an error.
@@ -168,8 +163,8 @@ public class RegistrationActivity extends Activity implements
 	}
 
 	private boolean isPasswordValid(String password) {
-		// TODO: Replace this with your own logic
-		return password.length() > 4;
+		return password != null && !password.equals("")
+				&& password.length() > 4;
 	}
 
 	/**
@@ -325,7 +320,8 @@ public class RegistrationActivity extends Activity implements
 				return false;
 			}
 
-			SharedPreferences sharedPreferences = getSharedPreferences("baladeye", MODE_PRIVATE);
+			SharedPreferences sharedPreferences = getSharedPreferences(
+					"baladeye", MODE_PRIVATE);
 			SharedPreferences.Editor editor = sharedPreferences.edit();
 			editor.putString("username", mEmail);
 			editor.putString("password", mPassword);
@@ -340,7 +336,10 @@ public class RegistrationActivity extends Activity implements
 			showProgress(false);
 
 			if (success) {
-				Intent intent = new Intent(RegistrationActivity.this, LandingActivity.class);
+				Intent intent = new Intent(RegistrationActivity.this,
+						LandingActivity.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				intent.putExtra("EXIT", true);
 				startActivity(intent);
 				finish();
 

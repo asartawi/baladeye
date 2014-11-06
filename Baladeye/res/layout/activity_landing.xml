@@ -36,7 +36,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:drawableTop="@drawable/activities"
-                android:text="@string/activities_title" />
+                android:text="@string/news_title" />
         </LinearLayout>
     </LinearLayout>
 
@@ -58,7 +58,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:drawableTop="@drawable/old_places"
-                android:text="@string/old_places_title" />
+                android:text="@string/latest_projects_title" />
         </LinearLayout>
 
         <LinearLayout
