@@ -20,86 +20,97 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.AOU.baladeye.LandingActivity;
-import com.AOU.baladeye.models.News;
-
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
-public class NewsFrontdoor extends AsyncTask<String, String, List<News>>{
+import com.AOU.baladeye.LandingActivity;
+import com.AOU.baladeye.models.News;
+
+public class NewsFrontdoor extends AsyncTask<String, String, List<News>> {
 
 	private Intent intent;
 	private LandingActivity activity;
 	public static List<News> newsList;
-	public NewsFrontdoor(Intent intent, LandingActivity activity){
+
+	public NewsFrontdoor(Intent intent, LandingActivity activity) {
 		this.intent = intent;
 		this.activity = activity;
 	}
-    @Override
-    protected List<News> doInBackground(String... uri) {
-        HttpClient httpclient = new DefaultHttpClient();
-        HttpResponse response;
-        String responseString = null;
-        newsList= new ArrayList<News>();
 
-        try {
-            response = httpclient.execute(new HttpGet(uri[0]));
-            StatusLine statusLine = response.getStatusLine();
-            if(statusLine.getStatusCode() == HttpStatus.SC_OK){
-                ByteArrayOutputStream out = new ByteArrayOutputStream();
-                response.getEntity().writeTo(out);
-                out.close();
-                responseString = out.toString();
-                try{
-    			JSONArray jsonArray = new JSONArray(responseString);
-    			for (int i = 0; i < jsonArray.length(); i++) {
-    				JSONObject object = jsonArray.getJSONObject(i);
-    				String title = object.getString("title");
-    				String picUrl = object.getString("pic");
-    				String content = object.getString("content");
-    				Bitmap bitmap = DownloadImage(picUrl);
-    				News news = new News(title, content, picUrl, bitmap);
-    				newsList.add(news);
-    			}
-    			
-    		} catch (JSONException e) {
-    			Log.e("NewsFrontdoor",
-    					"Failed to parse json from web response, web response: "
-    							+ responseString + " error: " + e.toString());
-    		}
-            } else{
-                //Closes the connection.
-                response.getEntity().getContent().close();
-                throw new IOException(statusLine.getReasonPhrase());
-            }
-        } catch (ClientProtocolException e) {
-            Log.e("frontdoor exception", "failed to request: " + uri.toString() + " " + e.toString());
-        } catch (IOException e) {
-            Log.e("frontdoor exception", "failed to request: " + uri.toString() + " " + e.toString());
-        }
-        return newsList;
-    }
+	@Override
+	protected List<News> doInBackground(String... uri) {
+		HttpClient httpclient = new DefaultHttpClient();
+		HttpResponse response;
+		String responseString = null;
+		newsList = new ArrayList<News>();
 
-    @Override
-    protected void onPostExecute(final List<News> news) {
-        super.onPostExecute(news);
-        //Do anything with response..
-        LandingActivity.context.runOnUiThread(new Runnable() {
-			
+		try {
+			response = httpclient.execute(new HttpGet(uri[0]));
+			StatusLine statusLine = response.getStatusLine();
+			if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
+				ByteArrayOutputStream out = new ByteArrayOutputStream();
+				response.getEntity().writeTo(out);
+				out.close();
+				responseString = out.toString();
+				try {
+					JSONArray jsonArray = new JSONArray(responseString);
+					for (int i = 0; i < jsonArray.length(); i++) {
+						JSONObject object = jsonArray.getJSONObject(i);
+						String title = object.getString("title");
+						String picUrl = object.getString("pic");
+						String content = object.getString("content");
+						Bitmap bitmap = DownloadImage(picUrl);
+						News news = new News(title, content, picUrl, bitmap);
+						newsList.add(news);
+					}
+
+				} catch (JSONException e) {
+					Log.e("NewsFrontdoor",
+							"Failed to parse json from web response, web response: "
+									+ responseString + " error: "
+									+ e.toString());
+				}
+			} else {
+				// Closes the connection.
+				response.getEntity().getContent().close();
+				throw new IOException(statusLine.getReasonPhrase());
+			}
+		} catch (ClientProtocolException e) {
+			Log.e("frontdoor exception", "failed to request: " + uri.toString()
+					+ " " + e.toString());
+		} catch (IOException e) {
+			activity.runOnUiThread(new Runnable() {
+				public void run() {
+					Toast.makeText(activity,
+							"الرجاء فحص اتصالكم بالإنترنت و المحاولة لاحقاً",
+							Toast.LENGTH_LONG).show();
+				}
+			});
+			Log.e("frontdoor exception", "failed to request: " + uri.toString()
+					+ " " + e.toString());
+		}
+		return newsList;
+	}
+
+	@Override
+	protected void onPostExecute(final List<News> news) {
+		super.onPostExecute(news);
+		// Do anything with response..
+		LandingActivity.context.runOnUiThread(new Runnable() {
+
 			@Override
 			public void run() {
 				activity.showProgress(false);
 				activity.startActivity(intent);
 			}
 		});
-    }
-    private InputStream OpenHttpConnection(String urlString) throws IOException {
+	}
+
+	private InputStream OpenHttpConnection(String urlString) throws IOException {
 		InputStream in = null;
 		int response = -1;
 

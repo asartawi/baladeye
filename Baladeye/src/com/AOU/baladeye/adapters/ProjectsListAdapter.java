@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.AOU.baladeye.R;
-import com.AOU.baladeye.models.News;
 import com.AOU.baladeye.models.Project;
 
 public class ProjectsListAdapter extends ArrayAdapter<Project> {

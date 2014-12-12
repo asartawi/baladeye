@@ -1,0 +1,111 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        tools:context="com.AOU.baladeye.CityResidentActivity" >
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:maxHeight="300dp"
+            android:src="@drawable/m_salfeet_logo" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+         <Spinner
+                android:id="@+id/complaint_types"
+                android:layout_width="fill_parent"
+                android:layout_weight="1"
+                android:layout_height="40dp" />
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="نوع الشكوى"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <AutoCompleteTextView
+                android:id="@+id/place_editText"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="الموقع"
+                android:inputType="textAutoCorrect"
+                android:maxLines="1"
+                android:singleLine="true" />
+        </LinearLayout>
+       <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <AutoCompleteTextView
+                android:id="@+id/name_editText"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="الاسم"
+                android:inputType="textAutoCorrect"
+                android:maxLines="1"
+                android:singleLine="true" />
+        </LinearLayout>
+
+
+        <AutoCompleteTextView
+            android:id="@+id/mobile_complaint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="الهاتف"
+            android:inputType="number"
+            android:maxLines="1"
+            android:singleLine="true" />
+
+                <AutoCompleteTextView
+            android:id="@+id/complaint_content_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="محتوى الشكوى"
+            android:inputType="textPersonName"
+            android:maxLines="8"
+            android:singleLine="false" />
+        
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:maxHeight="200dp"
+            android:src="@drawable/ic_launcher" />
+
+        <Button
+            android:id="@+id/btn_pick"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:text="ارفق صورة" />
+
+        <Button
+            android:id="@+id/send_request_btn"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:text="أرسل" />
+    </LinearLayout>
+
+</ScrollView>

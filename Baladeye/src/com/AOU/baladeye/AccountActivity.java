@@ -12,13 +12,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-import com.AOU.baladeye.frontdoors.CerteficatesFrontdoor;
 import com.AOU.baladeye.frontdoors.InvoicesFrontdoor;
 
 public class AccountActivity extends Activity implements Progress {
 
 	private Button invoicestBtn;
 	private Button certeficatesBtn;
+	private Button informationButton;
 	private View mProgressView;
 	private View mainView;
 
@@ -42,17 +42,28 @@ public class AccountActivity extends Activity implements Progress {
 						.execute("http://www.go-social.me/i-salfit/api/bills.php");
 			}
 		});
-		
-		certeficatesBtn = (Button) findViewById(R.id.invoices_btn);
+
+		certeficatesBtn = (Button) findViewById(R.id.customer_services_btn);
 		certeficatesBtn.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(AccountActivity.this,
-						InvoicesActivity.class);
-				showProgress(true);
-				new CerteficatesFrontdoor(intent, AccountActivity.this)
-						.execute("http://go-social.me/i-salfit/api/certificate_city_resident.php");
+						CustomerServicesActivity.class);
+				startActivity(intent);
+//				showProgress(true);
+//				new CerteficatesFrontdoor(intent, AccountActivity.this)
+//						.execute("http://go-social.me/i-salfit/api/certificate_city_resident.php");
+			}
+		});
+		informationButton = (Button) findViewById(R.id.information_btn);
+		informationButton.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(AccountActivity.this,
+						InformationActivity.class);
+				startActivity(intent);
 			}
 		});
 	}

@@ -1,15 +1,9 @@
 package com.AOU.baladeye.adapters;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.List;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.AOU.baladeye.R;
-import com.AOU.baladeye.R.id;
-import com.AOU.baladeye.R.layout;
 import com.AOU.baladeye.models.News;
 
 public class NewsListAdapter extends ArrayAdapter<News> {

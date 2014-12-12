@@ -1,0 +1,187 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="**المركز الجماهيري لبلدية سلفيت "
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+        </TableRow>
+
+        <TableRow>
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/editText1"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"
+                android:maxHeight="400dp"
+                android:src="@drawable/public_center" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/editText2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="10dp"
+                android:text="*الفئات المستفيدة:-" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/editText3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:paddingRight="30dp"
+                android:text="* البلدية لأنشطتها ومناسباتها عند الحاجة." />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/editText4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:paddingRight="30dp"
+                android:text="* العائلات ومناسباتها خاصة بيوت الأجر &quot;العزاء&quot; أو أي مناسبات" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/editText5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:paddingRight="30dp"
+                android:text="* مؤسسات المجتمع المدني ." />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/editText6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:paddingRight="30dp"
+                android:text="*الاجتماعات وورش العمل  ." />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/editText7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:paddingRight="30dp"
+                android:text="* توديع الحجاج ." />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/editText8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:paddingRight="10dp"
+                android:text=" الأنشطة المسموح بتنفيذها في المركز :-*" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/editText9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:paddingRight="30dp"
+                android:text="* ندوات واجتماعات ومحاضرات" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/editText10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:paddingRight="30dp"
+                android:text="* مناسبات العائلات العامة باستثناء الاعراس" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/editText11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="30dp"
+                android:text="* نشاطات و ورش عمل واجتماعات" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="10dp"
+                android:text="رسوم الاستخدام وهذا لا يشمل الضيافة ما يلي:-* " />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="30dp"
+                android:text="* اليوم كامل -250 شيقل ." />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="30dp"
+                android:text="* استخدام البروجيكتر 50 شيكل للساعة ." />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="30dp"
+                android:text="* تنظيف المركز 50 شيقل ." />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="10dp"
+                android:text="و أخيرا تتحمل الجهة المستفيدة أعمال النظافة اللازمة بعد الاستخدام، آو يقوم بدفع مبلغ 50 شيقل بدل أعمال نظافة." />
+        </TableRow>
+    </TableLayout>
+
+</ScrollView>

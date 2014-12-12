@@ -47,8 +47,40 @@
     <string name="is_paid_true">نعم</string>
     <string name="is_paid_false">لا</string>
     <string name="title_activity_account">حسابي</string>
-    <string name="view_invoices_btn_text">عرض الفواتير</string>
-    <string name="view_certeficates_btn_text">اطلب شهادة ساكن</string>
+    <string name="view_invoices_btn_text">فواتير</string>
+    <string name="customer_services_btn_text">خدمات الجمهور</string>
     <string name="title_activity_certeficates">شهادة ساكن</string>
+    <string name="register_name">الاسم الشخصي</string>
+    <string name="register_btn_txt">تسجيل حساب</string>
+    <string name="register_mobile">رقم الهاتف</string>
+    <string name="website_button_txt">موقع إلكتروني</string>
+    <string name="title_activity_website">موقع البلدية</string>
+    <string name="urgent_title">هواتف طارئة</string>
+    <string name="facilities_title">مرافق البلدية</string>
+    <string name="title_activity_facilities">المركز الجماهيري</string>
+    <string name="title_activity_urgent">هواتف طارئة</string>
+    <string name="view_information_btn_text">استعلامات</string>
+    <string name="title_activity_information">استعلامات</string>
+    <string name="title_activity_customer_services">خدمات الجمهور</string>
+    <string name="title_activity_city_resident">شهادة ساكن مدينة</string>
+    <string name="title_activity_complaints">تقديم شكوى</string>
+    <string name="title_activity_main">بلدية سلفيت</string>
+
+    <string-array name="complaint_types_array">
+        <item>نظافة</item>
+        <item>حفريات</item>
+        <item>إنارة</item>
+        <item>طرق</item>
+        <item>محلات</item>
+        <item>حدائق</item>
+        <item>مباني</item>
+        <item>أخرى</item>
+    </string-array>
+
+    <string name="title_activity_pay_invoice">دفع الفاتورة</string>
+    <string name="title_activity_facilities_list">مرافق البلدية</string>
+    <string name="title_activity_facility_masla5">مسلخ البلدية</string>
+    <string name="title_activity_facility_diwan">ديوان البلدية</string>
+    <string name="title_activity_facility_montazah">منتزه البلدية</string>
 
 </resources>

@@ -1,6 +1,6 @@
 package com.AOU.baladeye;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class SplashActivity extends ActionBarActivity {
+public class MainActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -26,19 +26,19 @@ public class SplashActivity extends ActionBarActivity {
 			startActivity(intent);
 			finish();
 		}
-		setContentView(R.layout.activity_splash);
+		setContentView(R.layout.activity_main);
 		final Button loginButton = (Button) findViewById(R.id.sign_in);
 		loginButton.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				if (!sharedPreferences.contains("username")) {
-					Toast.makeText(SplashActivity.this,
+					Toast.makeText(MainActivity.this,
 							getString(R.string.tostSignupFirst),
 							Toast.LENGTH_LONG).show();
 					loginButton.setError(getString(R.string.tostSignupFirst));
 				} else {
-					Intent intent = new Intent(SplashActivity.this,
+					Intent intent = new Intent(MainActivity.this,
 							LoginActivity.class);
 					startActivity(intent);
 				}
@@ -51,7 +51,7 @@ public class SplashActivity extends ActionBarActivity {
 			@Override
 			public void onClick(View v) {
 
-				Intent intent = new Intent(SplashActivity.this,
+				Intent intent = new Intent(MainActivity.this,
 						RegistrationActivity.class);
 				startActivity(intent);
 			}

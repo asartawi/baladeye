@@ -1,0 +1,113 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="10dp"
+                android:paddingTop="30dp"
+                android:text="**منتزه بلدية سلفيت"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+        </TableRow>
+
+        <TableRow>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"
+                android:maxHeight="400dp"
+                android:src="@drawable/montazah" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="10dp"
+                android:text="تقدر مساحة منتزه بلدية سلفيت في 6000م2. هذه المساحة تم تخصيصها من قبل بلدية سلفيت إن العناصر الأساسية لمنتزه بلدية سلفيت هي:" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="30dp"
+                android:text="1- مبنى القاعة العامة الرئيسي، والمكون من طابقين وبمساحة إجمالية 600م2. حيث الغاية من هذه القاعة هي توفير الإمكانية الكافية للمجتمع المحلي للاجتماعات العامة ولمختلف النشاطات." />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="30dp"
+                android:text="2- مبنى الخدمات الخارجي، والذي يحوي كفتيريا خارجية وخدمات وبمساحة 200م2، وذلك لتلبية احتياجات رواد منتزه البلدية من مختلف الخدمات." />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="30dp"
+                android:text="3- حديقة الأطفال، التي تم تجهيزها بمختلف الألعاب والوسائل الترفيهية لتلبية احتياجات الأطفال في هذا المجال." />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="30dp"
+                android:text="4- توفير وتجهيز الساحات الخارجية ومناطق الإنجيل الأخضر حيث تلبي احتياجات الرواد للجلوس وقضاء بعض الوقت وبالتالي تغييرا للروتين." />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="30dp"
+                android:text="5- تنفيذ وتجهيز المداخل الرئيسية للمنتزه والأسوار الخارجية" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="30dp"
+                android:text="6- تم عمل وتصميم هذا المشروع من قبل بلدية سلفيت وقد نفذ من قبل مقاولين محليين." />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="10dp"
+                android:text="لقد اعتبر هذا المشروع مشروعا وسطا من حيث التكلفة وفترة التنفيذ. ولقد حاولت بلدية سلفيت الاتصال بالعديد من المانحين والمؤسسات للتمكن من توفير المبالغ المطلوبة، حيث انه لم يكن من السهل تمويله من جهة واحدة." />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="10dp"
+                android:text="وخطوة بخطوة، نجحت بلدية سلفيت للحصول على التمويل اللازم لمعظم عناصر المشروع ومن جهات متعددة. كما وان نسبة العناصر المنفذة فاقت 75%، من العناصر التي خطط لها، وكان هذا كافيا للبدء بتشغيل المشروع حيث تم ذلك بتاريخ 1/12/2003." />
+        </TableRow>
+    </TableLayout>
+
+</ScrollView>

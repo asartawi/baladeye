@@ -14,116 +14,125 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" 
-        android:orientation="vertical"
-        android:id="@+id/landing_main_content">
+        android:layout_height="fill_parent"
+        android:layout_weight="1.5"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:maxHeight="300dp"
+            android:src="@drawable/m_salfeet_logo" />
+
+        <ImageView
+            android:id="@+id/main_image_view"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/landing_main_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:orientation="vertical" >
 
         <LinearLayout
+            style="?android:attr/buttonBarStyle"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="horizontal" >
 
-            <LinearLayout
+            <Button
+                android:id="@+id/facilities_btn"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:gravity="center" >
+                android:drawableTop="@drawable/old_places"
+                android:text="@string/facilities_title" />
 
-                <Button
-                    android:id="@+id/complaint_btn"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:drawableTop="@drawable/complaints_icon"
-                    android:text="@string/complaints_title" />
-            </LinearLayout>
-
-            <LinearLayout
+            <Button
+                android:id="@+id/website_btn"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:gravity="center" >
-
-                <Button
-                    android:id="@+id/news_btn"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:drawableTop="@drawable/activities"
-                    android:text="@string/news_title" />
-            </LinearLayout>
+                android:drawableTop="@drawable/website_icon"
+                android:text="@string/website_button_txt" />
         </LinearLayout>
 
         <LinearLayout
+            style="?android:attr/buttonBarStyle"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="horizontal" >
 
-            <LinearLayout
+            <Button
+                android:id="@+id/account_btn"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:gravity="center" >
+                android:drawableTop="@drawable/invoices_icon"
+                android:text="@string/title_activity_account" />
 
-                <Button
-                    android:id="@+id/projects_btn"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:drawableTop="@drawable/old_places"
-                    android:text="@string/latest_projects_title" />
-            </LinearLayout>
-
-            <LinearLayout
+            <Button
+                android:id="@+id/complaint_btn"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:gravity="center" >
-
-                <Button
-                    android:id="@+id/contact_btn"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:drawableTop="@drawable/contactus_icon"
-                    android:text="@string/contact_title" />
-            </LinearLayout>
+                android:drawableTop="@drawable/complaints_icon"
+                android:text="@string/complaints_title" />
         </LinearLayout>
 
         <LinearLayout
+            style="?android:attr/buttonBarStyle"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="horizontal" >
 
-            <LinearLayout
+            <Button
+                android:id="@+id/urgent_btn"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:gravity="center" >
+                android:drawableTop="@drawable/urgent_phones"
+                android:text="@string/urgent_title" />
 
-                <Button
-                    android:id="@+id/about_btn"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:drawableTop="@drawable/about_icon"
-                    android:text="@string/about_title" />
-            </LinearLayout>
-
-            <LinearLayout
+            <Button
+                android:id="@+id/about_btn"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:gravity="center" >
+                android:drawableTop="@drawable/about_icon"
+                android:text="@string/about_title" />
+        </LinearLayout>
 
-                <Button
-                    android:id="@+id/account_btn"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:drawableTop="@drawable/invoices_icon"
-                    android:text="@string/title_activity_account" />
-            </LinearLayout>
+        <LinearLayout
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/contact_btn"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:drawableTop="@drawable/contactus_icon"
+                android:text="@string/contact_title" />
         </LinearLayout>
     </LinearLayout>
 

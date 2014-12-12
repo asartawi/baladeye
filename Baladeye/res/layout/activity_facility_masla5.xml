@@ -1,0 +1,69 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="17dp"
+                android:layout_marginTop="14dp"
+                android:paddingRight="10dp"
+                android:text="**مسلخ بلدية سلفيت"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+        </TableRow>
+
+        <TableRow>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"
+                android:maxHeight="400dp"
+                android:src="@drawable/maslakh" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="10dp"
+                android:text="تأسس مسلخ البلدية سنة 2004 حيث قامت البلدية بشراء قطعة ارض في منطقة واد سلامة بعيدا عن المنطقة السكنية و تم انشاء المسلخ على قطعة الارض هذه ويتكون المسلخ البلدي من شعبتين :" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="30dp"
+                android:text="1- مسلخ الدواجن وهو مسلخ يستخدم الآلات الحديثة حيث طاقته الانتاجتية 500 طير في الساعة" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="30dp"
+                android:text="2- مسلخ المواشي ويستخدم الطريقة البدائية ويقوم اللحامون بذبح العجول والخراف فيه" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="10dp"
+                android:text="لقد اسهم المسلخ البلدي في الحفاظ على الصحة العامة داخل المدينة حيث كانت الفضلات والروائح الكريهة الناجمة عن معاطات الدواجن والذبح ( العجول ) في الشوارع العامة كذلك فان المسلخ البلدي يخضع لرقابة المؤسسات ذات الصلة من صحة وبيطرة وبلدية وغيرها مع العلم ان المسلخ يخضع لاشراف بيطري يومي ." />
+        </TableRow>
+    </TableLayout>
+
+</ScrollView>

@@ -25,80 +25,94 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.AOU.baladeye.LandingActivity;
-import com.AOU.baladeye.models.News;
 import com.AOU.baladeye.models.Project;
 
-public class ProjectsFrontdoor extends AsyncTask<String, String, List<Project>>{
+public class ProjectsFrontdoor extends AsyncTask<String, String, List<Project>> {
 
 	private Intent intent;
 	private LandingActivity activity;
 	public static List<Project> projectsList;
-	public ProjectsFrontdoor(Intent intent, LandingActivity activity){
+
+	public ProjectsFrontdoor(Intent intent, LandingActivity activity) {
 		this.intent = intent;
 		this.activity = activity;
 	}
-    @Override
-    protected List<Project> doInBackground(String... uri) {
-        HttpClient httpclient = new DefaultHttpClient();
-        HttpResponse response;
-        String responseString = null;
-        projectsList= new ArrayList<Project>();
 
-        try {
-            response = httpclient.execute(new HttpGet(uri[0]));
-            StatusLine statusLine = response.getStatusLine();
-            if(statusLine.getStatusCode() == HttpStatus.SC_OK){
-                ByteArrayOutputStream out = new ByteArrayOutputStream();
-                response.getEntity().writeTo(out);
-                out.close();
-                responseString = out.toString();
-                try{
-    			JSONArray jsonArray = new JSONArray(responseString);
-    			for (int i = 0; i < jsonArray.length(); i++) {
-    				JSONObject object = jsonArray.getJSONObject(i);
-    				String id = object.getString("id");
-    				String title = object.getString("title");
-    				String picUrl = object.getString("pic");
-    				String content = object.getString("content");
-    				Bitmap bitmap = DownloadImage(picUrl);
-    				Project news = new Project(id, title, picUrl, content, bitmap);
-    				projectsList.add(news);
-    			}
-    			
-    		} catch (JSONException e) {
-    			Log.e("ProjectsFrontdoor",
-    					"Failed to parse json from web response, web response: "
-    							+ responseString + " error: " + e.toString());
-    		}
-            } else{
-                //Closes the connection.
-                response.getEntity().getContent().close();
-                throw new IOException(statusLine.getReasonPhrase());
-            }
-        } catch (ClientProtocolException e) {
-            Log.e("frontdoor exception", "failed to request: " + uri.toString() + " " + e.toString());
-        } catch (IOException e) {
-            Log.e("frontdoor exception", "failed to request: " + uri.toString() + " " + e.toString());
-        }
-        return projectsList;
-    }
+	@Override
+	protected List<Project> doInBackground(String... uri) {
+		HttpClient httpclient = new DefaultHttpClient();
+		HttpResponse response;
+		String responseString = null;
+		projectsList = new ArrayList<Project>();
 
-    @Override
-    protected void onPostExecute(final List<Project> projects) {
-        super.onPostExecute(projects);
-        //Do anything with response..
-        LandingActivity.context.runOnUiThread(new Runnable() {
-			
+		try {
+			response = httpclient.execute(new HttpGet(uri[0]));
+			StatusLine statusLine = response.getStatusLine();
+			if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
+				ByteArrayOutputStream out = new ByteArrayOutputStream();
+				response.getEntity().writeTo(out);
+				out.close();
+				responseString = out.toString();
+				try {
+					JSONArray jsonArray = new JSONArray(responseString);
+					for (int i = 0; i < jsonArray.length(); i++) {
+						JSONObject object = jsonArray.getJSONObject(i);
+						String id = object.getString("id");
+						String title = object.getString("title");
+						String picUrl = object.getString("pic");
+						String content = object.getString("content");
+						Bitmap bitmap = DownloadImage(picUrl);
+						Project news = new Project(id, title, picUrl, content,
+								bitmap);
+						projectsList.add(news);
+					}
+
+				} catch (JSONException e) {
+					Log.e("ProjectsFrontdoor",
+							"Failed to parse json from web response, web response: "
+									+ responseString + " error: "
+									+ e.toString());
+				}
+			} else {
+				// Closes the connection.
+				response.getEntity().getContent().close();
+				throw new IOException(statusLine.getReasonPhrase());
+			}
+		} catch (ClientProtocolException e) {
+			Log.e("frontdoor exception", "failed to request: " + uri.toString()
+					+ " " + e.toString());
+		} catch (IOException e) {
+			activity.runOnUiThread(new Runnable() {
+				public void run() {
+					Toast.makeText(activity,
+							"الرجاء فحص اتصالكم بالإنترنت و المحاولة لاحقاً",
+							Toast.LENGTH_LONG).show();
+				}
+			});
+			Log.e("frontdoor exception", "failed to request: " + uri.toString()
+					+ " " + e.toString());
+		}
+		return projectsList;
+	}
+
+	@Override
+	protected void onPostExecute(final List<Project> projects) {
+		super.onPostExecute(projects);
+		// Do anything with response..
+		LandingActivity.context.runOnUiThread(new Runnable() {
+
 			@Override
 			public void run() {
 				activity.showProgress(false);
 				activity.startActivity(intent);
 			}
 		});
-    }
-    private InputStream OpenHttpConnection(String urlString) throws IOException {
+	}
+
+	private InputStream OpenHttpConnection(String urlString) throws IOException {
 		InputStream in = null;
 		int response = -1;
 

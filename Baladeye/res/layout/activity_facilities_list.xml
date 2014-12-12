@@ -1,0 +1,59 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:maxHeight="300dp"
+            android:src="@drawable/m_salfeet_logo" />
+
+        <Button
+            android:id="@+id/jamahere_btn"
+            style="@style/AppTheme"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:minHeight="80dp"
+            android:text="المركز الجماهيري"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/masla5_btn"
+            style="@style/AppTheme"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:minHeight="80dp"
+            android:text="المسلخ"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/diwan_btn"
+            style="@style/AppTheme"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:minHeight="80dp"
+            android:text="ديوان البلدية"
+            android:textStyle="bold" />
+                <Button
+            android:id="@+id/montazah_btn"
+            style="@style/AppTheme"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:minHeight="80dp"
+            android:text="منتزه البلدية"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</LinearLayout>

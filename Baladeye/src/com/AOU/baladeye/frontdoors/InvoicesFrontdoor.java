@@ -22,8 +22,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.AOU.baladeye.AccountActivity;
 import com.AOU.baladeye.LandingActivity;
@@ -34,10 +36,14 @@ public class InvoicesFrontdoor extends AsyncTask<String, String, List<Invoice>> 
 	private Intent intent;
 	private AccountActivity activity;
 	public static List<Invoice> invoicesList;
+	private String userId;
 
 	public InvoicesFrontdoor(Intent intent, AccountActivity activity) {
 		this.intent = intent;
 		this.activity = activity;
+		SharedPreferences sharedPreferences = activity.getSharedPreferences(
+				"baladeye", activity.MODE_PRIVATE);
+		userId = sharedPreferences.getString("user_id", "1");
 	}
 
 	@Override
@@ -46,10 +52,8 @@ public class InvoicesFrontdoor extends AsyncTask<String, String, List<Invoice>> 
 		invoicesList = new ArrayList<Invoice>();
 		String responseString;
 		try {
-			// JSONObject jsonObj = new JSONObject();
-			// jsonObj.put("user_id", "1");
 			List<NameValuePair> parameters = new ArrayList<NameValuePair>();
-			parameters.add(new BasicNameValuePair("user_id", "1"));
+			parameters.add(new BasicNameValuePair("user_id", userId));
 			HttpClient httpClient = new DefaultHttpClient();
 			HttpPost httpPost = new HttpPost(uri[0]);
 
@@ -104,15 +108,17 @@ public class InvoicesFrontdoor extends AsyncTask<String, String, List<Invoice>> 
 						"Failed to parse json from web response, web response: "
 								+ responseString + " error: " + e.toString());
 			}
-			// } else{
-			// //Closes the connection.
-			// response.getEntity().getContent().close();
-			// throw new IOException(statusLine.getReasonPhrase());
-			// }
 		} catch (ClientProtocolException e) {
 			Log.e("frontdoor exception", "failed to request: " + uri.toString()
 					+ " " + e.toString());
 		} catch (IOException e) {
+			activity.runOnUiThread(new Runnable() {
+				public void run() {
+					Toast.makeText(activity,
+							"الرجاء فحص اتصالكم بالإنترنت و المحاولة لاحقاً",
+							Toast.LENGTH_LONG).show();
+				}
+			});
 			Log.e("frontdoor exception", "failed to request: " + uri.toString()
 					+ " " + e.toString());
 		}

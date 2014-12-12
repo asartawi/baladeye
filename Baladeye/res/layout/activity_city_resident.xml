@@ -1,0 +1,138 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        tools:context="com.AOU.baladeye.CityResidentActivity" >
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:maxHeight="300dp"
+            android:src="@drawable/m_salfeet_logo" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/tvDate"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=""
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <Button
+                android:id="@+id/btnChangeDate"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="اختر تاريخ الميلاد" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <AutoCompleteTextView
+                android:id="@+id/email_resident_editText"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/prompt_email"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:singleLine="true" />
+        </LinearLayout>
+
+        <Switch
+            android:id="@+id/gender_switch"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="الجنس"
+            android:textOff="أنثى"
+            android:textOn="ذكر" />
+
+        <AutoCompleteTextView
+            android:id="@+id/resident_name_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="الاسم"
+            android:inputType="textPersonName"
+            android:maxLines="1"
+            android:singleLine="true" />
+
+        <AutoCompleteTextView
+            android:id="@+id/mobile_resident"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="الهاتف"
+            android:inputType="number"
+            android:maxLines="1"
+            android:singleLine="true" />
+
+        <ImageView
+            android:id="@+id/baraa_imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:maxHeight="200dp"
+            android:src="@drawable/ic_launcher" />
+
+        <Button
+            android:id="@+id/baraa_btn_pick"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:text="ارفق وثيقة براءة ذمة" />
+
+        <ImageView
+            android:id="@+id/bitaka_imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:maxHeight="200dp"
+            android:src="@drawable/ic_launcher" />
+
+        <Button
+            android:id="@+id/bitaka_btn_pick"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:text="ارفق بطاقة الهوية" />
+
+        <ImageView
+            android:id="@+id/ejar_imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:maxHeight="200dp"
+            android:src="@drawable/ic_launcher" />
+
+        <Button
+            android:id="@+id/ejar_btn_pick"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:text="أرفق وثيقة أجار منزل" />
+
+        <Button
+            android:id="@+id/send_request_btn"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:text="أرسل" />
+    </LinearLayout>
+
+</ScrollView>

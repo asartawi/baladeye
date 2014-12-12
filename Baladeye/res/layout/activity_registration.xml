@@ -30,12 +30,20 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
-
             <LinearLayout
                 android:id="@+id/email_login_form"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >
+
+                <AutoCompleteTextView
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/register_name"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:singleLine="true" />
 
                 <AutoCompleteTextView
                     android:id="@+id/email"
@@ -53,8 +61,16 @@
                     android:hint="@string/prompt_password"
                     android:imeActionId="@+id/login"
                     android:imeActionLabel="@string/action_sign_in_short"
-                    android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+
+                <AutoCompleteTextView
+                    android:id="@+id/mobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/register_mobile"
+                    android:inputType="number"
                     android:maxLines="1"
                     android:singleLine="true" />
 
@@ -64,7 +80,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="@string/action_sign_up"
+                    android:text="@string/register_btn_txt"
                     android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>

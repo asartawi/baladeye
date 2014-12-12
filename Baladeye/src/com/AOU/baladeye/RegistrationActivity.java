@@ -1,26 +1,39 @@
 package com.AOU.baladeye;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.params.ClientPNames;
+import org.apache.http.client.params.CookiePolicy;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.LoaderManager.LoaderCallbacks;
 import android.content.ContentResolver;
-import android.content.CursorLoader;
 import android.content.Intent;
-import android.content.Loader;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.os.Build.VERSION;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -40,8 +53,7 @@ import android.widget.TextView;
  * /android/getting-started#step_1_enable_the_google_api and follow the steps in
  * "Step 1" to create an OAuth 2.0 client for your package.
  */
-public class RegistrationActivity extends Activity implements
-		LoaderCallbacks<Cursor> {
+public class RegistrationActivity extends Activity {
 
 	/**
 	 * A dummy authentication store containing known user names and passwords.
@@ -56,6 +68,9 @@ public class RegistrationActivity extends Activity implements
 
 	// UI references.
 	private AutoCompleteTextView mEmailView;
+	private AutoCompleteTextView mobileView;
+	private AutoCompleteTextView nameView;
+
 	private EditText mPasswordView;
 	private View mProgressView;
 	private View mEmailLoginFormView;
@@ -64,11 +79,14 @@ public class RegistrationActivity extends Activity implements
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_login);
+		setContentView(R.layout.activity_registration);
 
 		// Set up the login form.
 		mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
-		populateAutoComplete();
+		mobileView = (AutoCompleteTextView) findViewById(R.id.mobile);
+		nameView = (AutoCompleteTextView) findViewById(R.id.name);
+
+//		populateAutoComplete();
 
 		mPasswordView = (EditText) findViewById(R.id.password);
 		mPasswordView
@@ -97,15 +115,15 @@ public class RegistrationActivity extends Activity implements
 		mEmailLoginFormView = findViewById(R.id.email_login_form);
 	}
 
-	private void populateAutoComplete() {
-		if (VERSION.SDK_INT >= 14) {
-			// Use ContactsContract.Profile (API 14+)
-			getLoaderManager().initLoader(0, null, this);
-		} else if (VERSION.SDK_INT >= 8) {
-			// Use AccountManager (API 8+)
-			new SetupEmailAutoCompleteTask().execute(null, null);
-		}
-	}
+//	private void populateAutoComplete() {
+//		if (VERSION.SDK_INT >= 14) {
+//			// Use ContactsContract.Profile (API 14+)
+//			getLoaderManager().initLoader(0, null, this);
+//		} else if (VERSION.SDK_INT >= 8) {
+//			// Use AccountManager (API 8+)
+//			new SetupEmailAutoCompleteTask().execute(null, null);
+//		}
+//	}
 
 	/**
 	 * Attempts to sign in or register the account specified by the login form.
@@ -140,7 +158,7 @@ public class RegistrationActivity extends Activity implements
 		}
 		// Check for a valid password, if the user entered one.
 		if (TextUtils.isEmpty(password) || !isPasswordValid(password)) {
-			mPasswordView.setError(getString(R.string.error_invalid_password))  ;
+			mPasswordView.setError(getString(R.string.error_invalid_password));
 			focusView = mPasswordView;
 			cancel = true;
 		}
@@ -153,11 +171,11 @@ public class RegistrationActivity extends Activity implements
 			// perform the user login attempt.
 			showProgress(true);
 			mAuthTask = new UserSignupTask(email, password);
-			mAuthTask.execute((Void) null);
+			mAuthTask.execute((String) null);
 		}
 	}
 
-	private boolean isEmailValid(String email) {
+	public static boolean isEmailValid(String email) {
 		// TODO: Replace this with your own logic
 		return email.contains("@");
 	}
@@ -208,47 +226,47 @@ public class RegistrationActivity extends Activity implements
 		}
 	}
 
-	@Override
-	public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-		return new CursorLoader(this,
-				// Retrieve data rows for the device user's 'profile' contact.
-				Uri.withAppendedPath(ContactsContract.Profile.CONTENT_URI,
-						ContactsContract.Contacts.Data.CONTENT_DIRECTORY),
-				ProfileQuery.PROJECTION,
+//	@Override
+//	public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
+//		return new CursorLoader(this,
+//				// Retrieve data rows for the device user's 'profile' contact.
+//				Uri.withAppendedPath(ContactsContract.Profile.CONTENT_URI,
+//						ContactsContract.Contacts.Data.CONTENT_DIRECTORY),
+//				ProfileQuery.PROJECTION,
+//
+//				// Select only email addresses.
+//				ContactsContract.Contacts.Data.MIMETYPE + " = ?",
+//				new String[] { ContactsContract.CommonDataKinds.Email.CONTENT_ITEM_TYPE },
+//
+//				// Show primary email addresses first. Note that there won't be
+//				// a primary email address if the user hasn't specified one.
+//				ContactsContract.Contacts.Data.IS_PRIMARY + " DESC");
+//	}
 
-				// Select only email addresses.
-				ContactsContract.Contacts.Data.MIMETYPE + " = ?",
-				new String[] { ContactsContract.CommonDataKinds.Email.CONTENT_ITEM_TYPE },
+//	@Override
+//	public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
+//		List<String> emails = new ArrayList<String>();
+//		cursor.moveToFirst();
+//		while (!cursor.isAfterLast()) {
+//			emails.add(cursor.getString(ProfileQuery.ADDRESS));
+//			cursor.moveToNext();
+//		}
+//
+//		addEmailsToAutoComplete(emails);
+//	}
 
-				// Show primary email addresses first. Note that there won't be
-				// a primary email address if the user hasn't specified one.
-				ContactsContract.Contacts.Data.IS_PRIMARY + " DESC");
-	}
+//	@Override
+//	public void onLoaderReset(Loader<Cursor> cursorLoader) {
+//
+//	}
 
-	@Override
-	public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
-		List<String> emails = new ArrayList<String>();
-		cursor.moveToFirst();
-		while (!cursor.isAfterLast()) {
-			emails.add(cursor.getString(ProfileQuery.ADDRESS));
-			cursor.moveToNext();
-		}
-
-		addEmailsToAutoComplete(emails);
-	}
-
-	@Override
-	public void onLoaderReset(Loader<Cursor> cursorLoader) {
-
-	}
-
-	private interface ProfileQuery {
-		String[] PROJECTION = { ContactsContract.CommonDataKinds.Email.ADDRESS,
-				ContactsContract.CommonDataKinds.Email.IS_PRIMARY, };
-
-		int ADDRESS = 0;
-		int IS_PRIMARY = 1;
-	}
+//	private interface ProfileQuery {
+//		String[] PROJECTION = { ContactsContract.CommonDataKinds.Email.ADDRESS,
+//				ContactsContract.CommonDataKinds.Email.IS_PRIMARY, };
+//
+//		int ADDRESS = 0;
+//		int IS_PRIMARY = 1;
+//	}
 
 	/**
 	 * Use an AsyncTask to fetch the user's email addresses on a background
@@ -299,35 +317,99 @@ public class RegistrationActivity extends Activity implements
 	 * Represents an asynchronous login/registration task used to authenticate
 	 * the user.
 	 */
-	public class UserSignupTask extends AsyncTask<Void, Void, Boolean> {
+	public class UserSignupTask extends AsyncTask<String, Void, Boolean> {
 
 		private final String mEmail;
 		private final String mPassword;
+		private final String registrationUrl = "http://www.go-social.me/i-salfit/api/reg.php";
 
 		UserSignupTask(String email, String password) {
 			mEmail = email;
 			mPassword = password;
+
 		}
 
 		@Override
-		protected Boolean doInBackground(Void... params) {
-			// TODO: attempt authentication against a network service.
-
+		protected Boolean doInBackground(String... params) {
+			String responseString;
 			try {
-				// Simulate network access.
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
+				List<NameValuePair> parameters = new ArrayList<NameValuePair>();
+				parameters.add(new BasicNameValuePair("name", nameView
+						.getText().toString()));
+				parameters.add(new BasicNameValuePair("mobile", mobileView
+						.getText().toString()));
+				parameters.add(new BasicNameValuePair("email", mEmailView
+						.getText().toString()));
+				parameters.add(new BasicNameValuePair("password", mPasswordView
+						.getText().toString()));
+
+				HttpClient httpClient = new DefaultHttpClient();
+				HttpPost httpPost = new HttpPost(registrationUrl);
+
+				// Set the http request
+				httpClient.getParams().setParameter(ClientPNames.COOKIE_POLICY,
+						CookiePolicy.RFC_2109);
+				// httpPost = new HttpPost(webServiceUrl + methodName);
+
+				httpPost.setHeader(
+						"Accept",
+						"text/html,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5");
+				httpPost.setHeader("Content-Type",
+						"application/x-www-form-urlencoded");
+
+				// Variable to keep the http response
+				responseString = null;
+
+				// Set the parameters if exist
+				if (parameters != null && !parameters.isEmpty()) {
+					try {
+						// Set the parameters in the request
+						httpPost.setEntity(new UrlEncodedFormEntity(parameters,
+								HTTP.UTF_8));
+					} catch (UnsupportedEncodingException e) {
+						e.printStackTrace();
+						return false;
+					}
+				}
+
+				// Execute the call
+				HttpResponse response = httpClient.execute(httpPost);
+				responseString = EntityUtils.toString(response.getEntity());
+				try {
+					JSONObject object = new JSONObject(responseString);
+					String result = object.getString("result");
+					if (result.equals("true")) {
+						SharedPreferences sharedPreferences = getSharedPreferences(
+								"baladeye", MODE_PRIVATE);
+						SharedPreferences.Editor editor = sharedPreferences
+								.edit();
+						editor.putString("username", mEmail);
+						editor.putString("password", mPassword);
+						editor.apply();
+						return true;
+					} else {
+						return false;
+					}
+
+				} catch (JSONException e) {
+					Log.e("InvoicesFrontdoor",
+							"Failed to parse json from web response, web response: "
+									+ responseString + " error: "
+									+ e.toString());
+					return false;
+				}
+
+			} catch (ClientProtocolException e) {
+				// Log.e("frontdoor exception", "failed to request: " +
+				// uri.toString()
+				// + " " + e.toString());
+				return false;
+			} catch (IOException e) {
+				// Log.e("frontdoor exception", "failed to request: " +
+				// uri.toString()
+				// + " " + e.toString());
 				return false;
 			}
-
-			SharedPreferences sharedPreferences = getSharedPreferences(
-					"baladeye", MODE_PRIVATE);
-			SharedPreferences.Editor editor = sharedPreferences.edit();
-			editor.putString("username", mEmail);
-			editor.putString("password", mPassword);
-			editor.apply();
-
-			return true;
 		}
 
 		@Override
@@ -342,7 +424,6 @@ public class RegistrationActivity extends Activity implements
 				intent.putExtra("EXIT", true);
 				startActivity(intent);
 				finish();
-
 			} else {
 				mPasswordView
 						.setError(getString(R.string.error_incorrect_password));

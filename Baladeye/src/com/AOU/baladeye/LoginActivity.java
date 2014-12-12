@@ -1,7 +1,24 @@
 package com.AOU.baladeye;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.params.ClientPNames;
+import org.apache.http.client.params.CookiePolicy;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -21,6 +38,7 @@ import android.os.Build.VERSION;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -40,9 +58,8 @@ import android.widget.TextView;
  * /android/getting-started#step_1_enable_the_google_api and follow the steps in
  * "Step 1" to create an OAuth 2.0 client for your package.
  */
-public class LoginActivity extends Activity implements
-		LoaderCallbacks<Cursor> {
-	
+public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
+
 	/**
 	 * Keep track of the login task to ensure we can cancel it if requested.
 	 */
@@ -58,7 +75,6 @@ public class LoginActivity extends Activity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
-
 
 		// Set up the login form.
 		mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
@@ -78,7 +94,7 @@ public class LoginActivity extends Activity implements
 					}
 				});
 
-		Button mEmailSignInButton = (Button) findViewById(R.id.email_register_button);
+		Button mEmailSignInButton = (Button) findViewById(R.id.email_login_button);
 		mEmailSignInButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -156,7 +172,8 @@ public class LoginActivity extends Activity implements
 	}
 
 	private boolean isPasswordValid(String password) {
-		return password != null && !password.equals("") &&  password.length() > 4;
+		return password != null && !password.equals("")
+				&& password.length() > 4;
 	}
 
 	/**
@@ -295,40 +312,85 @@ public class LoginActivity extends Activity implements
 
 		private final String mEmail;
 		private final String mPassword;
+		private final String loginUrl;
 
 		UserLoginTask(String email, String password) {
 			mEmail = email;
 			mPassword = password;
+			loginUrl = "http://www.go-social.me/i-salfit/api/login.php";
 		}
 
 		@Override
 		protected Boolean doInBackground(Void... params) {
-			// TODO: attempt authentication against a network service.
-
+			String responseString;
 			try {
-				// Simulate network access.
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				return false;
-			}
+				List<NameValuePair> parameters = new ArrayList<NameValuePair>();
+				parameters.add(new BasicNameValuePair("email", mEmailView
+						.getText().toString()));
+				parameters.add(new BasicNameValuePair("password", mPasswordView
+						.getText().toString()));
 
-			SharedPreferences sharedPreferences = getSharedPreferences("baladeye", MODE_PRIVATE);
-			SharedPreferences.Editor editor = sharedPreferences.edit();
-			if(sharedPreferences.contains("username")){
-				String username = sharedPreferences.getString("username", null);
-				String password = sharedPreferences.getString("password", null);
-				if(username == null || password == null){
+				HttpClient httpClient = new DefaultHttpClient();
+				HttpPost httpPost = new HttpPost(loginUrl);
+
+				// Set the http request
+				httpClient.getParams().setParameter(ClientPNames.COOKIE_POLICY,
+						CookiePolicy.RFC_2109);
+				// httpPost = new HttpPost(webServiceUrl + methodName);
+
+				httpPost.setHeader(
+						"Accept",
+						"text/html,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5");
+				httpPost.setHeader("Content-Type",
+						"application/x-www-form-urlencoded");
+
+				// Variable to keep the http response
+				responseString = null;
+
+				// Set the parameters if exist
+				if (parameters != null && !parameters.isEmpty()) {
+					try {
+						// Set the parameters in the request
+						httpPost.setEntity(new UrlEncodedFormEntity(parameters,
+								HTTP.UTF_8));
+					} catch (UnsupportedEncodingException e) {
+						e.printStackTrace();
+					}
+				}
+
+				// Execute the call
+				HttpResponse response = httpClient.execute(httpPost);
+				responseString = EntityUtils.toString(response.getEntity());
+				try {
+					JSONObject object = new JSONObject(responseString);
+					String result = object.getString("result");
+					String userId = object.getString("user_id");
+					if (result.equals("true")) {
+						SharedPreferences sharedPreferences = getSharedPreferences(
+								"baladeye", MODE_PRIVATE);
+						SharedPreferences.Editor editor = sharedPreferences
+								.edit();
+						editor.putString("username", mEmail);
+						editor.putString("password", mPassword);
+						editor.putBoolean("loggedIn", true);
+						editor.putString("user_id", userId);
+						editor.apply();
+						return true;
+					} else {
+						return false;
+					}
+				} catch (JSONException e) {
+					Log.e("InvoicesFrontdoor",
+							"Failed to parse json from web response, web response: "
+									+ responseString + " error: "
+									+ e.toString());
 					return false;
 				}
-				if(mEmail.equalsIgnoreCase(username) && mPassword.equalsIgnoreCase(password)){
-					editor.putBoolean("loggedIn", true);
-					editor.apply();
-					return true;
-				}
+			} catch (ClientProtocolException e) {
+				return false;
+			} catch (IOException e) {
+				return false;
 			}
-
-			// in valid username or password
-			return false;
 		}
 
 		@Override
@@ -337,7 +399,8 @@ public class LoginActivity extends Activity implements
 			showProgress(false);
 
 			if (success) {
-				Intent intent = new Intent(LoginActivity.this, LandingActivity.class);
+				Intent intent = new Intent(LoginActivity.this,
+						LandingActivity.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				intent.putExtra("EXIT", true);
 				startActivity(intent);
